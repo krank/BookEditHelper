@@ -43,6 +43,7 @@ function GetLastEditDateFromDocumentUrls() {
    Functionality
 ----------------------------------------------------------------------------- */
 
+// https://stackoverflow.com/a/78375674
 /**
  * Reads the word count of the file
  * @param {DocumentApp.Document} file
@@ -66,11 +67,15 @@ function getWordCount(file: GoogleAppsScript.Document.Document) {
  * @param getterFunction the function to be run on every document
  * @returns 
  */
-function getFromDocumentUrls(getterFunction: (doc: GoogleAppsScript.Document.Document) => validReturnTypes) {
+function getFromDocumentUrls(getterFunction: (doc: GoogleAppsScript.Document.Document) => validReturnTypes): void {
   const selectedRange = SpreadsheetApp.getSelection().getActiveRange();
   const ui = SpreadsheetApp.getUi();
 
-  if (!selectedRange || selectedRange.getNumColumns() < 2) return;
+  if (!selectedRange || selectedRange.getNumColumns() < 2)
+  {
+    ui.alert("No valid range selected");
+    return;
+  }
 
   const rightmostColumn = selectedRange.offset(0, selectedRange.getNumColumns() - 1);
 
