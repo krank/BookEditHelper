@@ -17,5 +17,6 @@ function onOpen() {
   BookEditHelper.Setup();
 }
 ```
+
 # Creds
 * Word count function: https://stackoverflow.com/a/78375674
